@@ -1,0 +1,98 @@
+/*****************************************************************************
+ * Copyright (c) 2022 Intecs.
+ *
+ *    
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *  Felicien Ihirwe
+ *
+ *****************************************************************************/
+import "../util/_Datatypes.thingml"
+import "../util/_Timer.thingml"
+import "ROOM_subs/ACUnit.thingml"
+import "ROOM_subs/WindowServo.thingml"
+import "ROOM_subs/LightBulb.thingml"
+import "ROOM_subs/TemperatureSensor.thingml"
+thing fragment BoardMessages {
+}
+thing Board includes TimerMsgs,BoardMessages,
+					ACUnitMessages,WindowServoMessages,
+					LightBulbMessages,TemperatureSensorMessages { 
+required port fromSensorPort{
+receives sensorData
+sends readSensor
+}
+required port toACUnit{
+sends AC_ON_payload,AC_OFF_payload
+}
+required port toBulb{
+sends LightBulbON,LightBulbOFF
+}
+required port toServo{
+sends WindowOPEN,WindowCLOSE
+}
+statechart BOARD_SM init 	IDLE{
+state IDLE{
+	on entry 
+	do
+	toServo!WindowCLOSE()
+	toACUnit!AC_OFF_payload()
+	toBulb!LightBulbOFF()
+	fromSensorPort!readSensor()
+	end
+	transition -> AC_OFFBulbOFFWindowClose 
+				
+	}
+state AC_OFFBulbOFFWindowClose{
+	on entry 
+	do
+	fromSensorPort!readSensor()
+	end
+	internal event 	fromSensorPort?sensorData	action 
+	do
+	toACUnit!AC_OFF_payload()
+	toServo!WindowCLOSE()
+	toBulb!LightBulbOFF()
+	fromSensorPort!readSensor()
+	end
+	transition -> AC_ONBulbONWindowOpen event e: fromSensorPort?sensorData
+					guard e.value > 30		
+	}
+state AC_ONBulbONWindowOpen{
+	on entry 
+	do
+	fromSensorPort!readSensor()
+	end
+	internal event 	fromSensorPort?sensorData	action 
+	do
+	toServo!WindowOPEN()
+	toACUnit!AC_ON_payload()
+	toBulb!LightBulbON()
+	fromSensorPort!readSensor()
+	end
+	transition -> AC_OFFBulbOFFWindowClose event e: fromSensorPort?sensorData
+	guard e.value < 30
+				
+	}
+	}
+}
+protocol Timer;
+configuration BoardApp{
+	instance boardObj : Board
+	instance acunitObj : ACUnit
+	instance windowservoObj : WindowServo
+	instance lightbulbObj : LightBulb
+	instance temperaturesensorObj : TemperatureSensor
+	connector boardObj.toServo => windowservoObj.inWindow
+	connector boardObj.fromSensorPort => temperaturesensorObj.inTempSensor
+	connector boardObj.toBulb => lightbulbObj.inBulb
+	connector boardObj.toACUnit => acunitObj.inACUnit
+		set acunitObj.PIN12 = 12
+		set windowservoObj.PIN13 = 13
+		set lightbulbObj.PIN11 = 11
+		set temperaturesensorObj.PIN0 = 0
+	}

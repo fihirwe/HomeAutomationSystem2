@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flaxml:system xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flaxml="http://www.polarsys.org/chess/fla/flaxml">
+  <flaxml:component xsi:type="flaxml:compositeComponent" id="model::modelSystemView::ROOM" name="ROOM">
+    <flaxml:inputPorts>
+      <flaxml:inputPort id="model::modelSystemView::ROOM::inRoomFmGateB" name="inRoomFmGateB">
+        <flaxml:inputFailure type="noFailure"/>
+      </flaxml:inputPort>
+      <flaxml:inputPort id="model::modelSystemView::ROOM::inRoomFmBattery" name="inRoomFmBattery">
+        <flaxml:inputFailure type="noFailure"/>
+      </flaxml:inputPort>
+    </flaxml:inputPorts>
+    <flaxml:outputPorts>
+      <flaxml:outputPort id="model::modelSystemView::ROOM::outRoomData" name="outRoomData">
+        <outputFailure type="valueCoarse"/>
+        <outputFailure type="noFailure"/>
+        <outputFailure type="omission"/>
+      </flaxml:outputPort>
+      <flaxml:outputPort id="model::modelSystemView::ROOM::outRoomFmWindow" name="outRoomFmWindow">
+        <outputFailure type="commission"/>
+        <outputFailure type="omission"/>
+        <outputFailure type="noFailure"/>
+        <outputFailure type="valueCoarse"/>
+      </flaxml:outputPort>
+      <flaxml:outputPort id="model::modelSystemView::ROOM::outRoomFmBulb" name="outRoomFmBulb">
+        <outputFailure type="omission"/>
+        <outputFailure type="noFailure"/>
+        <outputFailure type="commission"/>
+        <outputFailure type="valueCoarse"/>
+      </flaxml:outputPort>
+      <flaxml:outputPort id="model::modelSystemView::ROOM::outRoomFmAC" name="outRoomFmAC">
+        <outputFailure type="omission"/>
+        <outputFailure type="noFailure"/>
+        <outputFailure type="commission"/>
+        <outputFailure type="valueCoarse"/>
+      </flaxml:outputPort>
+    </flaxml:outputPorts>
+    <flaxml:connections>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::temp_sensor" sourceId="model::modelSystemView::TempSensor::outSensor2Board" targetComponent="model::modelSystemView::ROOM::board" targetId="model::modelSystemView::Board::inBoardFmSensor"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::board" sourceId="model::modelSystemView::Board::outBoard2Data" targetComponent="model::modelSystemView::ROOM" targetId="model::modelSystemView::ROOM::outRoomData"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::light_bulb" sourceId="model::modelSystemView::LightBulb::outBulb2Room" targetComponent="model::modelSystemView::ROOM" targetId="model::modelSystemView::ROOM::outRoomFmBulb"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::board" sourceId="model::modelSystemView::Board::outBoard2Servo" targetComponent="model::modelSystemView::ROOM::window_servo" targetId="model::modelSystemView::WindowServo::inServoFmBoard"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM" sourceId="model::modelSystemView::ROOM::inRoomFmBattery" targetComponent="model::modelSystemView::ROOM::board" targetId="model::modelSystemView::Board::inBoardFmBattery"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::board" sourceId="model::modelSystemView::Board::outBoard2AC" targetComponent="model::modelSystemView::ROOM::ACUnit" targetId="model::modelSystemView::ACUnit::inACFmBoard"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM" sourceId="model::modelSystemView::ROOM::inRoomFmGateB" targetComponent="model::modelSystemView::ROOM::board" targetId="model::modelSystemView::Board::inBoardFmRoomB"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::ACUnit" sourceId="model::modelSystemView::ACUnit::outAC2Room" targetComponent="model::modelSystemView::ROOM" targetId="model::modelSystemView::ROOM::outRoomFmAC"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::window_servo" sourceId="model::modelSystemView::WindowServo::outServo2Room" targetComponent="model::modelSystemView::ROOM" targetId="model::modelSystemView::ROOM::outRoomFmWindow"/>
+      <flaxml:connection sourceComponent="model::modelSystemView::ROOM::board" sourceId="model::modelSystemView::Board::outBoard2Bulb" targetComponent="model::modelSystemView::ROOM::light_bulb" targetId="model::modelSystemView::LightBulb::inBulbFmBoard"/>
+    </flaxml:connections>
+    <flaxml:components>
+      <flaxml:component xsi:type="flaxml:simpleComponent" id="model::modelSystemView::ROOM::temp_sensor" name="temp_sensor">
+        <flaxml:inputPorts>
+          <flaxml:inputPort id="model::modelSystemView::TempSensor::dummy" name="dummy">
+            <flaxml:inputFailure type="noFailure"/>
+          </flaxml:inputPort>
+        </flaxml:inputPorts>
+        <flaxml:outputPorts>
+          <flaxml:outputPort id="model::modelSystemView::TempSensor::outSensor2Board" name="outSensor2Board">
+            <outputFailure type="noFailure"/>
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="omission"/>
+          </flaxml:outputPort>
+        </flaxml:outputPorts>
+        <flaxml:rules>
+          <flaxml:rule pattern="dummy.noFailure->outSensor2Board.omission"/>
+          <flaxml:rule pattern="dummy.noFailure->outSensor2Board.valueCoarse"/>
+        </flaxml:rules>
+      </flaxml:component>
+      <flaxml:component xsi:type="flaxml:simpleComponent" id="model::modelSystemView::ROOM::ACUnit" name="ACUnit">
+        <flaxml:inputPorts>
+          <flaxml:inputPort id="model::modelSystemView::ACUnit::inACFmBoard" name="inACFmBoard">
+            <flaxml:inputFailure type="noFailure"/>
+            <flaxml:inputFailure type="commission"/>
+            <flaxml:inputFailure type="valueCoarse"/>
+            <flaxml:inputFailure type="omission"/>
+          </flaxml:inputPort>
+        </flaxml:inputPorts>
+        <flaxml:outputPorts>
+          <flaxml:outputPort id="model::modelSystemView::ACUnit::outAC2Room" name="outAC2Room">
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="omission"/>
+            <outputFailure type="commission"/>
+            <outputFailure type="noFailure"/>
+          </flaxml:outputPort>
+        </flaxml:outputPorts>
+        <flaxml:rules>
+          <flaxml:rule pattern="inACFmBoard.commission->outAC2Room.commission"/>
+          <flaxml:rule pattern="inACFmBoard.omission->outAC2Room.omission"/>
+          <flaxml:rule pattern="inACFmBoard.noFailure->outAC2Room.omission"/>
+        </flaxml:rules>
+      </flaxml:component>
+      <flaxml:component xsi:type="flaxml:simpleComponent" id="model::modelSystemView::ROOM::window_servo" name="window_servo">
+        <flaxml:inputPorts>
+          <flaxml:inputPort id="model::modelSystemView::WindowServo::inServoFmBoard" name="inServoFmBoard">
+            <flaxml:inputFailure type="valueCoarse"/>
+            <flaxml:inputFailure type="omission"/>
+            <flaxml:inputFailure type="noFailure"/>
+            <flaxml:inputFailure type="commission"/>
+          </flaxml:inputPort>
+        </flaxml:inputPorts>
+        <flaxml:outputPorts>
+          <flaxml:outputPort id="model::modelSystemView::WindowServo::outServo2Room" name="outServo2Room">
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="commission"/>
+            <outputFailure type="noFailure"/>
+            <outputFailure type="omission"/>
+          </flaxml:outputPort>
+        </flaxml:outputPorts>
+        <flaxml:rules>
+          <flaxml:rule pattern="inServoFmBoard.commission->outServo2Room.commission"/>
+          <flaxml:rule pattern="inServoFmBoard.omission->outServo2Room.omission"/>
+          <flaxml:rule pattern="inServoFmBoard.noFailure->outServo2Room.omission"/>
+        </flaxml:rules>
+      </flaxml:component>
+      <flaxml:component xsi:type="flaxml:simpleComponent" id="model::modelSystemView::ROOM::board" name="board">
+        <flaxml:inputPorts>
+          <flaxml:inputPort id="model::modelSystemView::Board::inBoardFmSensor" name="inBoardFmSensor">
+            <flaxml:inputFailure type="omission"/>
+            <flaxml:inputFailure type="noFailure"/>
+            <flaxml:inputFailure type="valueCoarse"/>
+          </flaxml:inputPort>
+          <flaxml:inputPort id="model::modelSystemView::Board::inBoardFmBattery" name="inBoardFmBattery">
+            <flaxml:inputFailure type="noFailure"/>
+          </flaxml:inputPort>
+          <flaxml:inputPort id="model::modelSystemView::Board::inBoardFmRoomB" name="inBoardFmRoomB">
+            <flaxml:inputFailure type="noFailure"/>
+          </flaxml:inputPort>
+        </flaxml:inputPorts>
+        <flaxml:outputPorts>
+          <flaxml:outputPort id="model::modelSystemView::Board::outBoard2Servo" name="outBoard2Servo">
+            <outputFailure type="noFailure"/>
+            <outputFailure type="commission"/>
+            <outputFailure type="omission"/>
+            <outputFailure type="valueCoarse"/>
+          </flaxml:outputPort>
+          <flaxml:outputPort id="model::modelSystemView::Board::outBoard2AC" name="outBoard2AC">
+            <outputFailure type="commission"/>
+            <outputFailure type="omission"/>
+            <outputFailure type="noFailure"/>
+            <outputFailure type="valueCoarse"/>
+          </flaxml:outputPort>
+          <flaxml:outputPort id="model::modelSystemView::Board::outBoard2Data" name="outBoard2Data">
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="noFailure"/>
+            <outputFailure type="omission"/>
+          </flaxml:outputPort>
+          <flaxml:outputPort id="model::modelSystemView::Board::outBoard2Bulb" name="outBoard2Bulb">
+            <outputFailure type="commission"/>
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="noFailure"/>
+            <outputFailure type="omission"/>
+          </flaxml:outputPort>
+        </flaxml:outputPorts>
+        <flaxml:rules>
+          <flaxml:rule pattern="inBoardFmBattery.noFailure,inBoardFmSensor.noFailure,inBoardFmRoomB.noFailure->outBoard2Data.omission,outBoard2AC.omission,outBoard2Bulb.omission,outBoard2Servo.omission"/>
+          <flaxml:rule pattern="inBoardFmBattery.noFailure,inBoardFmSensor.noFailure,inBoardFmRoomB.noFailure->outBoard2Data.valueCoarse,outBoard2AC.commission,outBoard2Bulb.commission,outBoard2Servo.commission"/>
+          <flaxml:rule pattern="inBoardFmBattery.wildcard,inBoardFmSensor.omission,inBoardFmRoomB.wildcard->outBoard2Data.omission,outBoard2AC.omission,outBoard2Bulb.omission,outBoard2Servo.omission"/>
+          <flaxml:rule pattern="inBoardFmBattery.omission,inBoardFmSensor.wildcard,inBoardFmRoomB.wildcard->outBoard2Data.omission,outBoard2AC.omission,outBoard2Bulb.omission,outBoard2Servo.omission"/>
+          <flaxml:rule pattern="inBoardFmBattery.wildcard,inBoardFmSensor.wildcard,inBoardFmRoomB.commission->outBoard2Data.noFailure,outBoard2AC.commission,outBoard2Bulb.commission,outBoard2Servo.commission"/>
+          <flaxml:rule pattern="inBoardFmBattery.wildcard,inBoardFmSensor.valueCoarse,inBoardFmRoomB.valueSubtle->outBoard2Data.valueCoarse,outBoard2AC.commission,outBoard2Bulb.commission,outBoard2Servo.commission"/>
+        </flaxml:rules>
+      </flaxml:component>
+      <flaxml:component xsi:type="flaxml:simpleComponent" id="model::modelSystemView::ROOM::light_bulb" name="light_bulb">
+        <flaxml:inputPorts>
+          <flaxml:inputPort id="model::modelSystemView::LightBulb::inBulbFmBoard" name="inBulbFmBoard">
+            <flaxml:inputFailure type="valueCoarse"/>
+            <flaxml:inputFailure type="noFailure"/>
+            <flaxml:inputFailure type="commission"/>
+            <flaxml:inputFailure type="omission"/>
+          </flaxml:inputPort>
+        </flaxml:inputPorts>
+        <flaxml:outputPorts>
+          <flaxml:outputPort id="model::modelSystemView::LightBulb::outBulb2Room" name="outBulb2Room">
+            <outputFailure type="commission"/>
+            <outputFailure type="noFailure"/>
+            <outputFailure type="valueCoarse"/>
+            <outputFailure type="omission"/>
+          </flaxml:outputPort>
+        </flaxml:outputPorts>
+        <flaxml:rules>
+          <flaxml:rule pattern="inBulbFmBoard.commission->outBulb2Room.commission"/>
+          <flaxml:rule pattern="inBulbFmBoard.omission->outBulb2Room.omission"/>
+          <flaxml:rule pattern="inBulbFmBoard.noFailure->outBulb2Room.omission"/>
+        </flaxml:rules>
+      </flaxml:component>
+    </flaxml:components>
+  </flaxml:component>
+</flaxml:system>

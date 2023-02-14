@@ -1,0 +1,44 @@
+/*****************************************************************************
+ * Copyright (c) 2022 Intecs.
+ *
+ *    
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *  Felicien Ihirwe
+ *
+ *****************************************************************************/
+import "../../util/_Datatypes.thingml"
+import "../../util/_Timer.thingml"
+thing fragment ACUnitMessages {
+	message AC_ON_payload();
+	message AC_OFF_payload();
+}
+thing ACUnit includes TimerMsgs,ACUnitMessages { 
+property PIN12: UInt8 = 12
+provided port inACUnit{
+receives AC_ON_payload,AC_OFF_payload
+}
+
+
+statechart ACUNIT_SM init 	StandBY{
+state StandBY{
+	on entry 
+	  do
+		`pinMode(`&PIN12&`, OUTPUT);`
+	  end
+	internal event 	inACUnit?AC_ON_payload	action 
+		  do
+		`digitalWrite(`&PIN12&`,HIGH);`
+		  end
+	internal event 	inACUnit?AC_OFF_payload	action 
+		  do
+		`digitalWrite(`&PIN12&`, LOW);`
+		  end
+	
+	}
+}
+}

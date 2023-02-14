@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:emfta="http://cmu.edu/emfta">
+  <emfta:FTAModel name="Fault Tree of outRoomData+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomData port in ROOM">
+    <events type="Intermediate" name="outRoomData+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomData port in ROOM" description="1_valueCoarse">
+      <gate description="1_valueCoarse" events="/0/@events.1 /0/@events.3"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Data+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outBoard2Data port in board" description="2_valueCoarse">
+      <gate description="2_valueCoarse" events="/0/@events.2"/>
+    </events>
+    <events name="outBoard2Data+valueCoarse &#xA;--------------&#xA; Board failing and send inaccurate data " probability="4.000E-05" description="3_valueCoarse"/>
+    <events type="Intermediate" name="outBoard2Data+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outBoard2Data port in board" description="4_valueCoarse">
+      <gate type="AND" description="4_valueCoarse" events="/0/@events.4 /0/@events.7"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at inBoardFmSensor port in board" description="5_valueCoarse">
+      <gate description="5_valueCoarse" events="/0/@events.5"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outSensor2Board port in temp_sensor" description="6_valueCoarse">
+      <gate description="6_valueCoarse" events="/0/@events.6"/>
+    </events>
+    <events name="outSensor2Board+valueCoarse &#xA;--------------&#xA; Sensor providing incorrect data" probability="4.000E-05" description="7_valueCoarse"/>
+    <events type="Intermediate" name="inBoardFmRoomB+valueSubtle &#xA;--------------&#xA; LOCAL FAILURE &lt;valueSubtle> at inBoardFmRoomB port in board" description="8_valueSubtle">
+      <gate description="8_valueSubtle" events="/0/@events.8"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+valueSubtle &#xA;--------------&#xA; INJECTED FAILURE &lt;valueSubtle> at inRoomFmGateB port in ROOM" description="9_valueSubtle"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomData+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomData port in ROOM">
+    <events type="Intermediate" name="outRoomData+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomData port in ROOM" description="10_omission">
+      <gate description="10_omission" events="/1/@events.1 /1/@events.3 /1/@events.7"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Data+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Data port in board" description="11_omission">
+      <gate description="11_omission" events="/1/@events.2"/>
+    </events>
+    <events name="outBoard2Data+omission &#xA;--------------&#xA; Board broken completely" probability="4.000E-05" description="12_omission"/>
+    <events type="Intermediate" name="outBoard2Data+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Data port in board" description="13_omission">
+      <gate description="13_omission" events="/1/@events.4"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmSensor port in board" description="14_omission">
+      <gate description="14_omission" events="/1/@events.5"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outSensor2Board port in temp_sensor" description="15_omission">
+      <gate description="15_omission" events="/1/@events.6"/>
+    </events>
+    <events name="outSensor2Board+omission &#xA;--------------&#xA; Sensor broken completely" probability="4.000E-05" description="16_omission"/>
+    <events type="Intermediate" name="outBoard2Data+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Data port in board" description="17_omission">
+      <gate description="17_omission" events="/1/@events.8"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmBattery+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmBattery port in board" description="18_omission">
+      <gate description="18_omission" events="/1/@events.9"/>
+    </events>
+    <events type="External" name="inRoomFmBattery+omission &#xA;--------------&#xA; INJECTED FAILURE &lt;omission> at inRoomFmBattery port in ROOM" description="19_omission"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmWindow+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmWindow port in ROOM">
+    <events type="Intermediate" name="outRoomFmWindow+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmWindow port in ROOM" description="20_omission">
+      <gate description="20_omission" events="/2/@events.1 /2/@events.12"/>
+    </events>
+    <events type="Intermediate" name="outServo2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outServo2Room port in window_servo" description="21_omission">
+      <gate description="21_omission" events="/2/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inServoFmBoard+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inServoFmBoard port in window_servo" description="22_omission">
+      <gate description="22_omission" events="/2/@events.3 /2/@events.5 /2/@events.9"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Servo+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Servo port in board" description="23_omission">
+      <gate description="23_omission" events="/2/@events.4"/>
+    </events>
+    <events name="outBoard2Servo+omission &#xA;--------------&#xA; Board broken completely" probability="4.000E-05" description="24_omission"/>
+    <events type="Intermediate" name="outBoard2Servo+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Servo port in board" description="25_omission">
+      <gate description="25_omission" events="/2/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmSensor port in board" description="26_omission">
+      <gate description="26_omission" events="/2/@events.7"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outSensor2Board port in temp_sensor" description="27_omission">
+      <gate description="27_omission" events="/2/@events.8"/>
+    </events>
+    <events name="outSensor2Board+omission &#xA;--------------&#xA; Sensor broken completely" probability="4.000E-05" description="28_omission"/>
+    <events type="Intermediate" name="outBoard2Servo+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Servo port in board" description="29_omission">
+      <gate description="29_omission" events="/2/@events.10"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmBattery+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmBattery port in board" description="30_omission">
+      <gate description="30_omission" events="/2/@events.11"/>
+    </events>
+    <events type="External" name="inRoomFmBattery+omission &#xA;--------------&#xA; INJECTED FAILURE &lt;omission> at inRoomFmBattery port in ROOM" description="31_omission"/>
+    <events type="Intermediate" name="outServo2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outServo2Room port in window_servo" description="32_omission">
+      <gate description="32_omission" events="/2/@events.13"/>
+    </events>
+    <events name="outServo2Room+omission &#xA;--------------&#xA; Window servo broken completely" probability="4.000E-05" description="33_omission"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmWindow+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmWindow port in ROOM">
+    <events type="Intermediate" name="outRoomFmWindow+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmWindow port in ROOM" description="34_valueCoarse">
+      <gate description="34_valueCoarse" events="/3/@events.1"/>
+    </events>
+    <events type="Undevelopped" name="UNDEVELOPED FAILURE" description="unknown_undeveloped"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmWindow+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmWindow port in ROOM">
+    <events type="Intermediate" name="outRoomFmWindow+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmWindow port in ROOM" description="35_commission">
+      <gate description="35_commission" events="/4/@events.1"/>
+    </events>
+    <events type="Intermediate" name="outServo2Room+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outServo2Room port in window_servo" description="36_commission">
+      <gate description="36_commission" events="/4/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inServoFmBoard+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inServoFmBoard port in window_servo" description="37_commission">
+      <gate description="37_commission" events="/4/@events.3 /4/@events.5 /4/@events.8"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Servo+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Servo port in board" description="38_commission">
+      <gate description="38_commission" events="/4/@events.4"/>
+    </events>
+    <events name="outBoard2Servo+commission &#xA;--------------&#xA; Board failing and send inaccurate signal " probability="4.000E-05" description="39_commission"/>
+    <events type="Intermediate" name="outBoard2Servo+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Servo port in board" description="40_commission">
+      <gate description="40_commission" events="/4/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmRoomB+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inBoardFmRoomB port in board" description="41_commission">
+      <gate description="41_commission" events="/4/@events.7"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+commission &#xA;--------------&#xA; INJECTED FAILURE &lt;commission> at inRoomFmGateB port in ROOM" description="42_commission"/>
+    <events type="Intermediate" name="outBoard2Servo+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Servo port in board" description="43_commission">
+      <gate type="AND" description="43_commission" events="/4/@events.9 /4/@events.12"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at inBoardFmSensor port in board" description="44_valueCoarse">
+      <gate description="44_valueCoarse" events="/4/@events.10"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outSensor2Board port in temp_sensor" description="45_valueCoarse">
+      <gate description="45_valueCoarse" events="/4/@events.11"/>
+    </events>
+    <events name="outSensor2Board+valueCoarse &#xA;--------------&#xA; Sensor providing incorrect data" probability="4.000E-05" description="46_valueCoarse"/>
+    <events type="Intermediate" name="inBoardFmRoomB+valueSubtle &#xA;--------------&#xA; LOCAL FAILURE &lt;valueSubtle> at inBoardFmRoomB port in board" description="47_valueSubtle">
+      <gate description="47_valueSubtle" events="/4/@events.13"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+valueSubtle &#xA;--------------&#xA; INJECTED FAILURE &lt;valueSubtle> at inRoomFmGateB port in ROOM" description="48_valueSubtle"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmBulb+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmBulb port in ROOM">
+    <events type="Intermediate" name="outRoomFmBulb+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmBulb port in ROOM" description="49_valueCoarse">
+      <gate description="49_valueCoarse" events="/5/@events.1"/>
+    </events>
+    <events type="Undevelopped" name="UNDEVELOPED FAILURE" description="unknown_undeveloped"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmBulb+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmBulb port in ROOM">
+    <events type="Intermediate" name="outRoomFmBulb+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmBulb port in ROOM" description="50_omission">
+      <gate description="50_omission" events="/6/@events.1 /6/@events.12"/>
+    </events>
+    <events type="Intermediate" name="outBulb2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBulb2Room port in light_bulb" description="51_omission">
+      <gate description="51_omission" events="/6/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inBulbFmBoard+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBulbFmBoard port in light_bulb" description="52_omission">
+      <gate description="52_omission" events="/6/@events.3 /6/@events.5 /6/@events.9"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Bulb+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Bulb port in board" description="53_omission">
+      <gate description="53_omission" events="/6/@events.4"/>
+    </events>
+    <events name="outBoard2Bulb+omission &#xA;--------------&#xA; Board broken completely" probability="4.000E-05" description="54_omission"/>
+    <events type="Intermediate" name="outBoard2Bulb+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Bulb port in board" description="55_omission">
+      <gate description="55_omission" events="/6/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmSensor port in board" description="56_omission">
+      <gate description="56_omission" events="/6/@events.7"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outSensor2Board port in temp_sensor" description="57_omission">
+      <gate description="57_omission" events="/6/@events.8"/>
+    </events>
+    <events name="outSensor2Board+omission &#xA;--------------&#xA; Sensor broken completely" probability="4.000E-05" description="58_omission"/>
+    <events type="Intermediate" name="outBoard2Bulb+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2Bulb port in board" description="59_omission">
+      <gate description="59_omission" events="/6/@events.10"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmBattery+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmBattery port in board" description="60_omission">
+      <gate description="60_omission" events="/6/@events.11"/>
+    </events>
+    <events type="External" name="inRoomFmBattery+omission &#xA;--------------&#xA; INJECTED FAILURE &lt;omission> at inRoomFmBattery port in ROOM" description="61_omission"/>
+    <events type="Intermediate" name="outBulb2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBulb2Room port in light_bulb" description="62_omission">
+      <gate description="62_omission" events="/6/@events.13"/>
+    </events>
+    <events name="outBulb2Room+omission &#xA;--------------&#xA; The LightBulb is completely broken" probability="4.000E-05" description="63_omission"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmBulb+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmBulb port in ROOM">
+    <events type="Intermediate" name="outRoomFmBulb+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmBulb port in ROOM" description="64_commission">
+      <gate description="64_commission" events="/7/@events.1"/>
+    </events>
+    <events type="Intermediate" name="outBulb2Room+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBulb2Room port in light_bulb" description="65_commission">
+      <gate description="65_commission" events="/7/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inBulbFmBoard+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inBulbFmBoard port in light_bulb" description="66_commission">
+      <gate description="66_commission" events="/7/@events.3 /7/@events.5 /7/@events.8"/>
+    </events>
+    <events type="Intermediate" name="outBoard2Bulb+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Bulb port in board" description="67_commission">
+      <gate description="67_commission" events="/7/@events.4"/>
+    </events>
+    <events name="outBoard2Bulb+commission &#xA;--------------&#xA; Board failing and send inaccurate signal " probability="4.000E-05" description="68_commission"/>
+    <events type="Intermediate" name="outBoard2Bulb+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Bulb port in board" description="69_commission">
+      <gate description="69_commission" events="/7/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmRoomB+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inBoardFmRoomB port in board" description="70_commission">
+      <gate description="70_commission" events="/7/@events.7"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+commission &#xA;--------------&#xA; INJECTED FAILURE &lt;commission> at inRoomFmGateB port in ROOM" description="71_commission"/>
+    <events type="Intermediate" name="outBoard2Bulb+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2Bulb port in board" description="72_commission">
+      <gate type="AND" description="72_commission" events="/7/@events.9 /7/@events.12"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at inBoardFmSensor port in board" description="73_valueCoarse">
+      <gate description="73_valueCoarse" events="/7/@events.10"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outSensor2Board port in temp_sensor" description="74_valueCoarse">
+      <gate description="74_valueCoarse" events="/7/@events.11"/>
+    </events>
+    <events name="outSensor2Board+valueCoarse &#xA;--------------&#xA; Sensor providing incorrect data" probability="4.000E-05" description="75_valueCoarse"/>
+    <events type="Intermediate" name="inBoardFmRoomB+valueSubtle &#xA;--------------&#xA; LOCAL FAILURE &lt;valueSubtle> at inBoardFmRoomB port in board" description="76_valueSubtle">
+      <gate description="76_valueSubtle" events="/7/@events.13"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+valueSubtle &#xA;--------------&#xA; INJECTED FAILURE &lt;valueSubtle> at inRoomFmGateB port in ROOM" description="77_valueSubtle"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmAC+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmAC port in ROOM">
+    <events type="Intermediate" name="outRoomFmAC+omission &#xA;--------------&#xA; TOP FAILURE &lt;omission> at outRoomFmAC port in ROOM" description="78_omission">
+      <gate description="78_omission" events="/8/@events.1 /8/@events.12"/>
+    </events>
+    <events type="Intermediate" name="outAC2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outAC2Room port in ACUnit" description="79_omission">
+      <gate description="79_omission" events="/8/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inACFmBoard+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inACFmBoard port in ACUnit" description="80_omission">
+      <gate description="80_omission" events="/8/@events.3 /8/@events.5 /8/@events.9"/>
+    </events>
+    <events type="Intermediate" name="outBoard2AC+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2AC port in board" description="81_omission">
+      <gate description="81_omission" events="/8/@events.4"/>
+    </events>
+    <events name="outBoard2AC+omission &#xA;--------------&#xA; Board broken completely" probability="4.000E-05" description="82_omission"/>
+    <events type="Intermediate" name="outBoard2AC+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2AC port in board" description="83_omission">
+      <gate description="83_omission" events="/8/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmSensor port in board" description="84_omission">
+      <gate description="84_omission" events="/8/@events.7"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outSensor2Board port in temp_sensor" description="85_omission">
+      <gate description="85_omission" events="/8/@events.8"/>
+    </events>
+    <events name="outSensor2Board+omission &#xA;--------------&#xA; Sensor broken completely" probability="4.000E-05" description="86_omission"/>
+    <events type="Intermediate" name="outBoard2AC+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outBoard2AC port in board" description="87_omission">
+      <gate description="87_omission" events="/8/@events.10"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmBattery+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at inBoardFmBattery port in board" description="88_omission">
+      <gate description="88_omission" events="/8/@events.11"/>
+    </events>
+    <events type="External" name="inRoomFmBattery+omission &#xA;--------------&#xA; INJECTED FAILURE &lt;omission> at inRoomFmBattery port in ROOM" description="89_omission"/>
+    <events type="Intermediate" name="outAC2Room+omission &#xA;--------------&#xA; LOCAL FAILURE &lt;omission> at outAC2Room port in ACUnit" description="90_omission">
+      <gate description="90_omission" events="/8/@events.13"/>
+    </events>
+    <events name="outAC2Room+omission &#xA;--------------&#xA; The AC unit is completely broken" probability="4.000E-05" description="91_omission"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmAC+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmAC port in ROOM">
+    <events type="Intermediate" name="outRoomFmAC+commission &#xA;--------------&#xA; TOP FAILURE &lt;commission> at outRoomFmAC port in ROOM" description="92_commission">
+      <gate description="92_commission" events="/9/@events.1"/>
+    </events>
+    <events type="Intermediate" name="outAC2Room+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outAC2Room port in ACUnit" description="93_commission">
+      <gate description="93_commission" events="/9/@events.2"/>
+    </events>
+    <events type="Intermediate" name="inACFmBoard+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inACFmBoard port in ACUnit" description="94_commission">
+      <gate description="94_commission" events="/9/@events.3 /9/@events.5 /9/@events.8"/>
+    </events>
+    <events type="Intermediate" name="outBoard2AC+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2AC port in board" description="95_commission">
+      <gate description="95_commission" events="/9/@events.4"/>
+    </events>
+    <events name="outBoard2AC+commission &#xA;--------------&#xA; Board failing and send inaccurate signal " probability="4.000E-05" description="96_commission"/>
+    <events type="Intermediate" name="outBoard2AC+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2AC port in board" description="97_commission">
+      <gate description="97_commission" events="/9/@events.6"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmRoomB+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at inBoardFmRoomB port in board" description="98_commission">
+      <gate description="98_commission" events="/9/@events.7"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+commission &#xA;--------------&#xA; INJECTED FAILURE &lt;commission> at inRoomFmGateB port in ROOM" description="99_commission"/>
+    <events type="Intermediate" name="outBoard2AC+commission &#xA;--------------&#xA; LOCAL FAILURE &lt;commission> at outBoard2AC port in board" description="100_commission">
+      <gate type="AND" description="100_commission" events="/9/@events.9 /9/@events.12"/>
+    </events>
+    <events type="Intermediate" name="inBoardFmSensor+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at inBoardFmSensor port in board" description="101_valueCoarse">
+      <gate description="101_valueCoarse" events="/9/@events.10"/>
+    </events>
+    <events type="Intermediate" name="outSensor2Board+valueCoarse &#xA;--------------&#xA; LOCAL FAILURE &lt;valueCoarse> at outSensor2Board port in temp_sensor" description="102_valueCoarse">
+      <gate description="102_valueCoarse" events="/9/@events.11"/>
+    </events>
+    <events name="outSensor2Board+valueCoarse &#xA;--------------&#xA; Sensor providing incorrect data" probability="4.000E-05" description="103_valueCoarse"/>
+    <events type="Intermediate" name="inBoardFmRoomB+valueSubtle &#xA;--------------&#xA; LOCAL FAILURE &lt;valueSubtle> at inBoardFmRoomB port in board" description="104_valueSubtle">
+      <gate description="104_valueSubtle" events="/9/@events.13"/>
+    </events>
+    <events type="External" name="inRoomFmGateB+valueSubtle &#xA;--------------&#xA; INJECTED FAILURE &lt;valueSubtle> at inRoomFmGateB port in ROOM" description="105_valueSubtle"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel name="Fault Tree of outRoomFmAC+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmAC port in ROOM">
+    <events type="Intermediate" name="outRoomFmAC+valueCoarse &#xA;--------------&#xA; TOP FAILURE &lt;valueCoarse> at outRoomFmAC port in ROOM" description="106_valueCoarse">
+      <gate description="106_valueCoarse" events="/10/@events.1"/>
+    </events>
+    <events type="Undevelopped" name="UNDEVELOPED FAILURE" description="unknown_undeveloped"/>
+  </emfta:FTAModel>
+  <emfta:FTAModel/>
+</xmi:XMI>

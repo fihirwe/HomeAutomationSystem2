@@ -1,0 +1,48 @@
+/*****************************************************************************
+ * Copyright (c) 2022 Intecs.
+ *
+ *    
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *  Felicien Ihirwe
+ *
+ *****************************************************************************/
+import "../../util/_Datatypes.thingml"
+import "../../util/_Timer.thingml"
+thing fragment TemperatureSensorMessages {
+	message sensorData(value : Long );
+	message readSensor();
+}
+thing TemperatureSensor includes TimerMsgs, TemperatureSensorMessages
+@c_header "#include <DHT.h>"
+@c_global "DHT dht(0, DHT11);"
+
+{
+property PIN0: UInt8 = 0
+provided port inTempSensor{
+receives readSensor
+sends sensorData
+}
+
+
+
+statechart TEMPERATURESENSOR_SM init 	Sensing{
+state Sensing{
+	on entry 
+	  do
+		`dht.begin();` `pinMode(`&PIN0&`, OUTPUT);`
+	  end
+	internal event 	inTempSensor?readSensor	action 
+		  do
+		`delay(250);`
+		inTempSensor!sensorData(`dht.readTemperature()` as UInt16 )
+		  end
+	
+
+	}
+}
+}

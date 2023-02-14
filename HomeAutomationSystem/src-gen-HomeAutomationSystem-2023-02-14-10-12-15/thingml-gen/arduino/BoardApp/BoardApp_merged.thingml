@@ -1,0 +1,296 @@
+thing fragment BoardMessages {
+}
+thing Board includes TimerMsgs , BoardMessages , ACUnitMessages , WindowServoMessages , LightBulbMessages , TemperatureSensorMessages {
+	required port fromSensorPort {
+		sends readSensor receives sensorData
+	}
+	required port toACUnit {
+		sends AC_ON_payload sends AC_OFF_payload
+	}
+	required port toBulb {
+		sends LightBulbON sends LightBulbOFF
+	}
+	required port toServo {
+		sends WindowOPEN sends WindowCLOSE
+	}
+	statechart BOARD_SM init IDLE {
+		state IDLE {
+			on entry do
+				toServo!WindowCLOSE()
+				toACUnit!AC_OFF_payload()
+				toBulb!LightBulbOFF()
+				fromSensorPort!readSensor()
+			end
+			transition -> AC_OFFBulbOFFWindowClose
+		}
+		state AC_OFFBulbOFFWindowClose {
+			on entry do
+				fromSensorPort!readSensor()
+			end
+			internal
+			event fromSensorPort?sensorData
+			action do
+				toACUnit!AC_OFF_payload()
+				toServo!WindowCLOSE()
+				toBulb!LightBulbOFF()
+				fromSensorPort!readSensor()
+			end
+			transition -> AC_ONBulbONWindowOpen
+			event e : fromSensorPort?sensorData
+			guard e.value > 30
+		}
+		state AC_ONBulbONWindowOpen {
+			on entry do
+				fromSensorPort!readSensor()
+			end
+			internal
+			event fromSensorPort?sensorData
+			action do
+				toServo!WindowOPEN()
+				toACUnit!AC_ON_payload()
+				toBulb!LightBulbON()
+				fromSensorPort!readSensor()
+			end
+			transition -> AC_OFFBulbOFFWindowClose
+			event e : fromSensorPort?sensorData
+			guard e.value < 30
+		}
+	}
+}
+datatype Byte<1>
+	@type_checker "Integer"
+	@c_type "uint8_t"
+	@c_byte_size "1"
+	@java_type "byte"
+	@java_primitive "true"
+datatype Boolean<2>
+	@type_checker "Boolean"
+	@c_type "bool"
+	@c_byte_size "2"
+	@java_type "boolean"
+	@java_primitive "true"
+datatype Integer<2>
+	@type_checker "Integer"
+	@c_type "int"
+	@c_byte_size "2"
+	@java_type "short"
+	@java_primitive "true"
+	@ros_type "int16"
+datatype UInt8<1>
+	@type_checker "Integer"
+	@c_type "uint8_t"
+	@c_byte_size "1"
+	@java_type "short"
+	@java_primitive "true"
+datatype Int8<1>
+	@type_checker "Integer"
+	@c_type "int8_t"
+	@c_byte_size "1"
+	@java_type "byte"
+	@java_primitive "true"
+datatype UInt16<2>
+	@type_checker "Integer"
+	@c_type "uint16_t"
+	@c_byte_size "2"
+	@java_type "int"
+	@java_primitive "true"
+datatype Int16<2>
+	@type_checker "Integer"
+	@c_type "int16_t"
+	@c_byte_size "2"
+	@java_type "short"
+	@java_primitive "true"
+datatype Int32<4>
+	@type_checker "Integer"
+	@c_type "int32_t"
+	@c_byte_size "4"
+	@java_type "int"
+	@java_primitive "true"
+datatype UInt32<4>
+	@c_type "uint32_t"
+	@java_type "long"
+	@java_primitive "true"
+datatype Long<4>
+	@type_checker "Integer"
+	@c_type "long"
+	@c_byte_size "4"
+	@java_type "int"
+	@java_primitive "true"
+datatype ULong<4>
+	@type_checker "Integer"
+	@c_type "unsigned long"
+	@c_byte_size "4"
+	@java_type "long"
+	@java_primitive "true"
+datatype Double<8>
+	@type_checker "Real"
+	@c_type "double"
+	@c_byte_size "8"
+	@java_type "float"
+	@java_primitive "true"
+datatype Float<8>
+	@type_checker "Real"
+	@c_type "float"
+	@c_byte_size "8"
+	@java_type "float"
+	@java_primitive "true"
+datatype Char<1>
+	@type_checker "Character"
+	@c_type "char"
+	@c_byte_size "1"
+	@java_type "char"
+	@js_type "char"
+	@java_primitive "true"
+object String
+	@c_type "char *"
+	@c_byte_size "*"
+	@java_type "String"
+	@js_type "String"
+enumeration DigitalState
+	@type_checker "Integer"
+	@java_type "byte"
+	@java_primitive "true"
+	@c_byte_size "1"
+	@c_type "uint8_t"
+	{
+	LOW @enum_val "0"
+	HIGH @enum_val "1"
+}
+datatype LongLong<8>
+	@type_checker "Integer"
+	@c_type "long long"
+	@c_byte_size "8"
+	@java_type "long"
+	@java_primitive "true"
+thing fragment TimerMsgs {
+	message timer_start(id : UInt8, time : UInt32)
+	@timer_start "true" message timer_cancel(id : UInt8)
+	@timer_cancel "true" message timer_timeout(id : UInt8)
+	@timeout "true" message ms25_tic()
+	@xms_tic "25" message ms500_tic()
+	@xms_tic "500"
+}
+thing fragment ACUnitMessages {
+	message AC_ON_payload()
+	message AC_OFF_payload()
+}
+thing ACUnit includes TimerMsgs , ACUnitMessages {
+	provided port inACUnit {
+		receives AC_ON_payload receives AC_OFF_payload
+	}
+	property PIN12 : UInt8 = 12
+	statechart ACUNIT_SM init StandBY {
+		state StandBY {
+			on entry do
+				`pinMode(` & PIN12 & `, OUTPUT);`
+			end
+			internal
+			event inACUnit?AC_ON_payload
+			action do
+				`digitalWrite(` & PIN12 & `,HIGH);`
+			end
+			internal
+			event inACUnit?AC_OFF_payload
+			action do
+				`digitalWrite(` & PIN12 & `, LOW);`
+			end
+		}
+	}
+}
+thing fragment WindowServoMessages {
+	message WindowCLOSE()
+	message WindowOPEN()
+}
+thing WindowServo includes TimerMsgs , WindowServoMessages {
+	provided port inWindow {
+		receives WindowOPEN receives WindowCLOSE
+	}
+	property PIN13 : UInt8 = 13
+	statechart WINDOWSERVO_SM init WindowReady {
+		state WindowReady {
+			on entry do
+				`pinMode(` & PIN13 & `, OUTPUT);`
+			end
+			internal
+			event inWindow?WindowOPEN
+			action do
+				`digitalWrite(` & PIN13 & `,HIGH);`
+			end
+			internal
+			event inWindow?WindowCLOSE
+			action do
+				`digitalWrite(` & PIN13 & `, LOW);`
+			end
+		}
+	}
+}
+thing fragment LightBulbMessages {
+	message LightBulbON()
+	message LightBulbOFF()
+}
+thing LightBulb includes TimerMsgs , LightBulbMessages {
+	provided port inBulb {
+		receives LightBulbON receives LightBulbOFF
+	}
+	property PIN11 : UInt8 = 11
+	statechart LIGHTBULB_SM init BulbReady {
+		state BulbReady {
+			on entry do
+				`pinMode(` & PIN11 & `, OUTPUT);`
+			end
+			internal
+			event inBulb?LightBulbON
+			action do
+				`digitalWrite(` & PIN11 & `,HIGH);`
+			end
+			internal
+			event inBulb?LightBulbOFF
+			action do
+				`digitalWrite(` & PIN11 & `, LOW);`
+			end
+		}
+	}
+}
+thing fragment TemperatureSensorMessages {
+	message sensorData(value : Long)
+	message readSensor()
+}
+thing TemperatureSensor includes TimerMsgs , TemperatureSensorMessages @c_header "#include <DHT.h>" @c_global "DHT dht(0, DHT11);" {
+	provided port inTempSensor {
+		sends sensorData receives readSensor
+	}
+	property PIN0 : UInt8 = 0
+	statechart TEMPERATURESENSOR_SM init Sensing {
+		state Sensing {
+			on entry do
+			`dht.begin();`
+				`pinMode(` & PIN0 & `, OUTPUT);`
+			end
+			internal
+			event inTempSensor?readSensor
+			action do
+			`delay(250);`
+				inTempSensor!sensorData(`dht.readTemperature()` as UInt16)
+			end
+		}
+	}
+}
+protocol Timer
+
+protocol Timer
+
+configuration BoardApp {
+	instance boardObj : Board
+	instance acunitObj : ACUnit
+	instance windowservoObj : WindowServo
+	instance lightbulbObj : LightBulb
+	instance temperaturesensorObj : TemperatureSensor
+	connector boardObj.toServo => windowservoObj . inWindow
+	connector boardObj.fromSensorPort => temperaturesensorObj . inTempSensor
+	connector boardObj.toBulb => lightbulbObj . inBulb
+	connector boardObj.toACUnit => acunitObj . inACUnit
+	set acunitObj.PIN12 = 12
+	set windowservoObj.PIN13 = 13
+	set lightbulbObj.PIN11 = 11
+	set temperaturesensorObj.PIN0 = 0
+}
